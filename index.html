@@ -3,142 +3,134 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11091f">
-  <title>Dodge the Donuts | Build Your Challenge</title>
+  <meta name="theme-color" content="#170b35">
+  <title>Dodge the Donuts | DDD Perth 2026</title>
   <style>
-    /* No external assets: the entire booth demo lives in this file. */
     :root {
       color-scheme: dark;
-      --pink: #ff58bd;
-      --cyan: #71f5ff;
-      --yellow: #ffe478;
-      --muted: #c0b2d1;
-      --border: #ffffff24;
+      --ink: #fff8ff;
+      --muted: #c9b9e2;
+      --pink: #ff58c8;
+      --cyan: #64f5ff;
+      --yellow: #ffe66d;
+      --purple: #9d65ff;
+      --panel: rgb(30 16 62 / 88%);
+      --line: rgb(210 175 255 / 25%);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
     }
+
     * { box-sizing: border-box; }
-    [hidden] { display: none !important; }
+
     body {
-      margin: 0;
-      padding: 22px;
+      min-width: 320px;
       min-height: 100vh;
-      color: white;
+      margin: 0;
+      color: var(--ink);
       background:
-        radial-gradient(ellipse at 15% 5%, #472064, transparent 45%),
-        radial-gradient(ellipse at 90% 70%, #12384f, transparent 45%),
-        #11091f;
-      font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
+        radial-gradient(ellipse at 50% -15%, rgb(119 45 205 / 55%), transparent 54%),
+        radial-gradient(ellipse at 8% 42%, rgb(206 34 157 / 15%), transparent 35%),
+        #100922;
     }
-    button, textarea { font: inherit; }
+
+    button, select, textarea { font: inherit; }
+    button, select { color: var(--ink); }
     button { cursor: pointer; }
-    button:disabled { opacity: .45; cursor: not-allowed; }
-    button:focus-visible, textarea:focus-visible {
-      outline: 3px solid var(--yellow);
-      outline-offset: 4px;
+    button:disabled, select:disabled { cursor: not-allowed; opacity: .55; }
+    :focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+    .page {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
     }
-    .app { width: min(1280px, 100%); margin: auto; }
-    .topbar, .brand, .actions, .stats, .footer, .panel-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .topbar, .footer, .panel-header { justify-content: space-between; }
-    .brand { font-weight: 850; }
-    .brand span { font-size: 26px; }
-    .actions { justify-content: flex-end; flex-wrap: wrap; }
-    .utility {
-      padding: 9px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: white;
-      background: #ffffff08;
-      font-size: 12px;
-      font-weight: 750;
-    }
-    .utility:hover:not(:disabled) { background: #ffffff18; }
-    #host-toggle { border-color: #71f5ff70; color: var(--cyan); }
-    header { padding: 23px 0 18px; text-align: center; }
+
+    .masthead { text-align: center; margin-bottom: 22px; }
     .eyebrow {
-      color: var(--yellow);
-      font-size: 11px;
-      font-weight: 850;
-      letter-spacing: .2em;
+      margin: 0 0 8px;
+      color: var(--cyan);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .22em;
       text-transform: uppercase;
     }
     h1 {
-      margin: 9px 0;
-      font-size: clamp(38px, 5vw, 70px);
-      font-weight: 950;
-      letter-spacing: -.06em;
-      line-height: 1;
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 5.2rem);
+      font-weight: 1000;
+      letter-spacing: -.055em;
+      line-height: .98;
+      text-shadow: 0 0 20px rgb(255 88 200 / 56%), 0 4px 0 #642693;
     }
-    h1 span {
-      color: transparent;
-      background: linear-gradient(100deg, #ff9bd7, var(--pink), var(--yellow));
-      background-clip: text;
-      -webkit-background-clip: text;
+    h1 .donuts { color: var(--yellow); }
+    .tagline { margin: 12px 0 0; color: var(--muted); font-size: clamp(.95rem, 2vw, 1.15rem); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(290px, .8fr);
+      align-items: start;
+      gap: 18px;
     }
-    .subtitle { margin: 12px 0 0; color: var(--muted); }
-    .stats { justify-content: center; gap: 30px; margin-top: 20px; }
-    .stat { min-width: 80px; }
-    .stat label {
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgb(47 27 87 / 92%), rgb(23 12 50 / 94%));
+      box-shadow: 0 16px 44px rgb(5 0 19 / 38%), inset 0 1px rgb(255 255 255 / 7%);
+    }
+
+    .game-card { padding: 17px; }
+    .scoreboard {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+    .score-cell {
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1px solid rgb(190 148 255 / 24%);
+      border-radius: 13px;
+      background: rgb(13 7 34 / 60%);
+    }
+    .score-label {
       display: block;
+      overflow: hidden;
       color: var(--muted);
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: .14em;
+      font-size: .67rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
-    .stat strong {
+    .score-value {
       display: block;
       margin-top: 3px;
-      font-size: 26px;
+      color: var(--yellow);
+      font-size: clamp(1.1rem, 3vw, 1.65rem);
       font-variant-numeric: tabular-nums;
+      font-weight: 950;
     }
-    #time { color: var(--cyan); }
-    #best, #near { color: var(--yellow); }
+    .score-cell:nth-child(2) .score-value { color: var(--cyan); }
 
-    .arena {
+    .arena-wrap {
       position: relative;
-      height: clamp(360px, 52vh, 650px);
       overflow: hidden;
-      border: 1px solid #b999ff55;
-      border-radius: 26px;
-      background: #0d0820;
-      box-shadow: 0 0 70px #bc4aff18, 0 24px 70px #0006;
+      border: 2px solid rgb(166 111 255 / 55%);
+      border-radius: 16px;
+      background: #160e32;
+      box-shadow: 0 0 25px rgb(134 68 255 / 17%), inset 0 0 25px rgb(5 3 20 / 55%);
+      touch-action: none;
     }
-    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-    .arena-label {
-      position: absolute;
-      top: 18px;
-      left: 20px;
-      color: #d1c5ef;
-      font-size: 10px;
-      letter-spacing: .12em;
-      pointer-events: none;
-    }
-    .arena-label small {
+    canvas {
       display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 9px;
-      letter-spacing: .04em;
-    }
-    .live-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan);
-    }
-    .progress {
-      position: absolute;
-      bottom: 0;
       width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--pink), var(--cyan));
-      transform-origin: left;
-      pointer-events: none;
+      height: clamp(310px, 47vw, 510px);
+      min-height: 310px;
+      touch-action: none;
     }
     .overlay {
       position: absolute;
@@ -146,1365 +138,1120 @@
       display: grid;
       place-items: center;
       padding: 20px;
-      background: #0d082040;
-      backdrop-filter: blur(5px);
-    }
-    .card {
-      width: min(460px, 100%);
-      padding: 26px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: linear-gradient(145deg, #291842ed, #110c25f2);
-      box-shadow: 0 22px 80px #0005;
-      text-align: center;
-    }
-    .card-icon { font-size: 48px; filter: drop-shadow(0 0 20px #ff58bd66); }
-    .card h2 {
-      margin: 10px 0 8px;
-      font-size: clamp(27px, 4vw, 36px);
-      letter-spacing: -.04em;
-    }
-    .card p { margin: 0 0 18px; color: var(--muted); line-height: 1.5; }
-    .primary {
-      width: 100%;
-      padding: 15px 18px;
-      border: 0;
-      border-radius: 14px;
-      color: #250f2d;
-      background: linear-gradient(110deg, var(--pink), #ff978c);
-      box-shadow: 0 8px 28px #ff58bd35;
-      font-size: 15px;
-      font-weight: 900;
-    }
-    .primary:hover:not(:disabled) { filter: brightness(1.1); }
-    .hint { margin-top: 13px; color: var(--muted); font-size: 11px; }
-    .countdown {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(circle, #29184280, transparent 70%);
+      background: rgb(14 7 34 / 41%);
       text-align: center;
       pointer-events: none;
     }
-    .countdown strong {
+    .overlay[hidden] { display: none; }
+    .overlay-copy {
+      max-width: 520px;
+      padding: 15px 24px;
+      border: 1px solid rgb(255 255 255 / 20%);
+      border-radius: 18px;
+      background: rgb(24 12 54 / 80%);
+      box-shadow: 0 0 34px rgb(190 76 255 / 35%);
+      backdrop-filter: blur(5px);
+    }
+    .overlay-title {
       display: block;
       color: var(--yellow);
-      font-size: clamp(100px, 16vw, 180px);
-      font-weight: 950;
+      font-size: clamp(2.5rem, 9vw, 5.5rem);
+      font-weight: 1000;
       line-height: 1;
-      letter-spacing: -.07em;
-      text-shadow: 0 0 28px #ff58bd80, 0 0 70px #ffe47840;
+      text-shadow: 0 0 22px rgb(255 230 109 / 55%);
     }
-    .countdown span {
-      display: block;
-      margin-top: 16px;
-      color: var(--cyan);
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: .16em;
-    }
-    .countdown .pop { animation: pop .3s ease-out; }
-    @keyframes pop {
-      from { opacity: .35; transform: scale(1.2); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .preset-caption {
-      margin: 18px 2px 9px;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: .12em;
-      font-weight: 750;
-    }
-    .modes {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-    }
-    .mode {
-      padding: 13px 12px;
-      border: 1px solid #ffffff18;
-      border-radius: 15px;
-      color: white;
-      background: #ffffff05;
-      text-align: left;
-    }
-    .mode:hover:not(:disabled) { background: #ffffff0d; }
-    .mode[aria-pressed="true"] {
-      border-color: var(--pink);
-      background: #ff58bd12;
-    }
-    .mode strong { display: block; margin-bottom: 5px; font-size: 13px; }
-    .mode small { color: var(--muted); font-size: 11px; }
-    .footer {
-      flex-wrap: wrap;
-      padding: 16px 3px 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .footer strong { color: var(--cyan); }
-    kbd {
-      padding: 2px 6px;
-      border: 1px solid var(--border);
-      border-bottom-width: 3px;
-      border-radius: 5px;
-      color: white;
-      background: #ffffff08;
-      font: inherit;
-    }
+    .overlay-subtitle { display: block; margin-top: 8px; font-size: clamp(.95rem, 2vw, 1.15rem); }
+    .overlay .small-copy { display: block; margin-top: 9px; color: var(--muted); font-size: .85rem; }
 
-    /* The panel separates real edit prompts from instant, prewritten fallbacks. */
-    .host {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      bottom: 14px;
-      z-index: 100;
-      width: min(470px, calc(100vw - 28px));
-      overflow-y: auto;
-      padding: 22px;
-      border: 1px solid #71f5ff65;
-      border-radius: 24px;
-      background: linear-gradient(155deg, #302044fa, #100d25fc);
-      box-shadow: 0 24px 90px #0009, 0 0 45px #71f5ff18;
-      backdrop-filter: blur(18px);
+    .game-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 13px;
     }
-    .host h2 { margin: 0; font-size: 25px; letter-spacing: -.04em; }
-    .host h3 { margin: 22px 0 10px; font-size: 16px; }
-    .host p, .host li { color: var(--muted); font-size: 12px; line-height: 1.6; }
-    .host ol { padding-left: 20px; }
-    .host-tag {
-      display: inline-block;
-      padding: 6px 10px;
+    .button {
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 1px solid rgb(255 255 255 / 22%);
+      border-radius: 11px;
+      color: var(--ink);
+      background: linear-gradient(135deg, #8d4dff, #d43db1);
+      box-shadow: 0 5px 15px rgb(155 59 220 / 22%);
+      font-weight: 900;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .button:hover:not(:disabled) { filter: brightness(1.14); transform: translateY(-1px); }
+    .button.secondary { background: rgb(255 255 255 / 8%); }
+    .button.cyan { color: #071b31; background: linear-gradient(135deg, var(--cyan), #99fff0); }
+    .button.gold { color: #30200a; background: linear-gradient(135deg, var(--yellow), #ffb954); }
+    .button.small { min-height: 36px; padding: 7px 11px; font-size: .87rem; }
+    .control-spacer { flex: 1 1 auto; }
+    .select-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .84rem; font-weight: 800; }
+    select {
+      max-width: 180px;
+      min-height: 40px;
+      padding: 7px 28px 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background-color: #261348;
+    }
+    option { color: var(--ink); background: #261348; }
+
+    .mode-note, .controls-note, .best-note { margin: 10px 2px 0; color: var(--muted); font-size: .87rem; line-height: 1.5; }
+    .mode-note strong { color: var(--cyan); }
+    .controls-note { margin-top: 6px; }
+    .result-line { min-height: 1.5em; color: var(--yellow); font-weight: 800; }
+    .best-note { display: flex; justify-content: space-between; gap: 10px; }
+
+    .side { display: grid; gap: 18px; }
+    .side-card { padding: 18px; }
+    h2 { margin: 0 0 10px; font-size: 1.28rem; }
+    h3 { margin: 18px 0 8px; font-size: 1rem; color: var(--cyan); }
+    p { line-height: 1.55; }
+    .side-card p { margin: 8px 0; color: var(--muted); font-size: .92rem; }
+    .challenge-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .local-tag {
+      padding: 5px 8px;
+      border: 1px solid rgb(100 245 255 / 36%);
       border-radius: 999px;
       color: var(--cyan);
-      background: #71f5ff12;
-      font-size: 10px;
-      font-weight: 850;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      white-space: nowrap;
     }
-    .host-tag.fallback { color: var(--yellow); background: #ffe47814; }
-    .challenge-grid, .host-actions, .fallback-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .challenge, .fallback-button {
-      padding: 12px 9px;
-      border: 1px solid var(--border);
+    .challenge-panel[hidden] { display: none; }
+    .challenge-panel { margin-top: 12px; }
+    .prompt-card {
+      margin-top: 11px;
+      padding: 11px;
+      border: 1px solid rgb(210 175 255 / 18%);
       border-radius: 12px;
-      color: white;
-      background: #ffffff06;
-      font-size: 12px;
-      font-weight: 750;
-      text-align: left;
+      background: rgb(12 7 29 / 45%);
     }
-    .challenge[aria-pressed="true"] {
-      border-color: var(--cyan);
-      background: #71f5ff12;
-    }
-    .challenge small {
+    .prompt-title { margin: 0 0 7px; font-size: .93rem; color: var(--yellow); }
+    textarea {
       display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 500;
-    }
-    .host label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--cyan);
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .host textarea {
       width: 100%;
-      min-height: 210px;
+      min-height: 140px;
       resize: vertical;
+      padding: 10px;
+      border: 1px solid rgb(210 175 255 / 28%);
+      border-radius: 9px;
+      color: #fff;
+      background: #110a27;
+      font: .78rem/1.45 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    .prompt-actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .copy-status { min-height: 1.3em; margin: 6px 0 0; color: var(--cyan); font-size: .78rem; }
+    .workflow {
+      margin: 10px 0 0;
+      padding-left: 21px;
+      color: var(--muted);
+      font-size: .87rem;
+      line-height: 1.55;
+    }
+    .workflow strong { color: var(--ink); }
+    .fallback {
+      margin-top: 18px;
       padding: 13px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      color: #eee7ff;
-      background: #09071690;
-      font: 12px/1.6 ui-monospace, monospace;
-    }
-    .host-actions .utility { border-radius: 12px; }
-    .host .primary { margin-top: 12px; }
-    .host #host-status { min-height: 35px; color: var(--yellow); }
-    .host .note {
-      padding: 12px;
-      border: 1px solid var(--border);
+      border: 1px dashed rgb(255 230 109 / 58%);
       border-radius: 12px;
-      background: #ffffff04;
+      background: rgb(255 230 109 / 6%);
     }
-    @media (max-width: 850px) {
-      .modes { grid-template-columns: repeat(3, 1fr); }
-      .brand { font-size: 12px; }
+    .fallback h3 { margin: 0 0 7px; color: var(--yellow); font-size: .9rem; letter-spacing: .045em; }
+    .fallback p { margin: 4px 0 10px; font-size: .82rem; }
+    .fallback-modes { display: flex; flex-wrap: wrap; gap: 7px; }
+    .source-note {
+      margin-top: 13px;
+      padding-top: 11px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.5;
     }
-    @media (max-width: 550px) {
-      body { padding: 12px; }
-      .topbar { align-items: flex-start; }
-      .actions { gap: 6px; }
-      .utility { padding: 8px 9px; font-size: 11px; }
-      .stats { gap: 12px; }
-      .stat { min-width: 60px; }
-      .stat strong { font-size: 22px; }
-      .arena { height: 420px; }
-      .modes { grid-template-columns: repeat(2, 1fr); }
-      .footer { justify-content: center; text-align: center; }
+    .source-note strong { color: var(--yellow); }
+    .footer { margin-top: 22px; color: #aa96c8; font-size: .78rem; text-align: center; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .side > :first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      .page { width: min(100% - 20px, 520px); padding-top: 20px; }
+      .game-card { padding: 11px; }
+      .side { grid-template-columns: 1fr; }
+      .side > :first-child { grid-column: auto; }
+      .scoreboard { gap: 6px; }
+      .score-cell { padding: 8px; }
+      .score-label { font-size: .58rem; letter-spacing: .07em; }
+      canvas { height: 64vh; min-height: 300px; max-height: 460px; }
+      .control-spacer { display: none; }
+      .select-label { flex: 1 1 100%; }
+      .select-label select { flex: 1; max-width: none; }
+      .game-controls > .button { flex: 1 1 auto; }
+      .best-note { font-size: .78rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .countdown .pop { animation: none; }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <main class="app">
-    <nav class="topbar" aria-label="Game controls">
-      <div class="brand"><span aria-hidden="true">🍩</span> THE SPRINKLE ZONE</div>
-      <div class="actions">
-        <button class="utility" id="host-toggle" type="button"
-          aria-controls="host" aria-expanded="false">✨ Build Your Challenge</button>
-        <button class="utility" id="sound-toggle" type="button"
-          aria-pressed="false">🔇 Sound off</button>
-        <button class="utility" id="fullscreen" type="button">⛶ Fullscreen</button>
-        <button class="utility" id="reset" type="button">↻ Reset round</button>
-      </div>
-    </nav>
-
-    <header>
-      <div class="eyebrow">Your idea. A live code edit. Your challenge.</div>
-      <h1>Dodge the <span>Donuts.</span></h1>
-      <p class="subtitle">Ask Copilot for a new rule. Review the code. Survive your creation.</p>
-      <div class="stats" aria-label="Scoreboard">
-        <div class="stat"><label>TIME LEFT</label><strong id="time">15.0</strong></div>
-        <div class="stat"><label>SCORE</label><strong id="score">0000</strong></div>
-        <div class="stat"><label>MODE BEST</label><strong id="best">0000</strong></div>
-        <div class="stat"><label>CLOSE PASSES</label><strong id="near">0</strong></div>
-      </div>
+  <main class="page">
+    <header class="masthead">
+      <p class="eyebrow">DDD Perth 2026 · Arcade challenge</p>
+      <h1>DODGE THE <span class="donuts">DONUTS</span></h1>
+      <p class="tagline">Can you survive your own prompt?</p>
     </header>
 
-    <section class="arena" aria-label="Dodge the Donuts game">
-      <canvas id="game"
-        aria-label="Move with arrow keys, A and D, or drag to dodge obstacles">
-        Your browser needs Canvas support to play this game.
-      </canvas>
-      <div class="arena-label">
-        <span class="live-dot"></span><span id="mode-label">CLASSIC FLIGHT</span>
-        <small>Local code only · This page is not connected to Copilot</small>
-      </div>
-      <div class="progress" id="progress"></div>
-
-      <div class="countdown" id="countdown" role="status"
-        aria-live="polite" aria-atomic="true" hidden>
-        <div>
-          <strong id="countdown-number">3</strong>
-          <span id="countdown-caption">GET READY, SUGAR PILOT</span>
+    <div class="layout">
+      <section class="card game-card" aria-label="Dodge the Donuts game">
+        <div class="scoreboard" aria-label="Round scoreboard">
+          <div class="score-cell"><span class="score-label">Time</span><span class="score-value" id="timeReadout">15.0</span></div>
+          <div class="score-cell"><span class="score-label">Score</span><span class="score-value" id="scoreReadout">0</span></div>
+          <div class="score-cell"><span class="score-label">Close passes</span><span class="score-value" id="nearReadout">0</span></div>
         </div>
-      </div>
-
-      <div class="overlay" id="overlay">
-        <div class="card">
-          <div class="card-icon" id="card-icon" aria-hidden="true">🚀</div>
-          <h2 id="card-title">Ready for the sugar storm?</h2>
-          <p id="card-description">
-            Faster drops. More donuts. Close passes earn bonus points.
-            Survive 15 seconds.
-          </p>
-          <button class="primary" id="start" type="button">LET'S FLY ✨</button>
-          <div class="hint">← → or A / D to move · Drag on touchscreens</div>
+        <div class="arena-wrap">
+          <canvas id="arena" aria-label="Game arena. Move with arrow keys, A and D, or drag the pointer."></canvas>
+          <div class="overlay" id="gameOverlay" aria-live="assertive">
+            <div class="overlay-copy">
+              <span class="overlay-title" id="overlayTitle">READY?</span>
+              <span class="overlay-subtitle" id="overlaySubtitle">The donuts are falling. Stay frosty.</span>
+              <span class="small-copy" id="overlayHint">Press Space or tap Start round</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+        <div class="game-controls">
+          <button class="button gold" id="startButton" type="button">Start round</button>
+          <label class="select-label" for="modeSelect">PREWRITTEN GAME MODE
+            <select id="modeSelect" aria-label="Select a prewritten game mode"></select>
+          </label>
+          <span class="control-spacer"></span>
+          <button class="button secondary small" id="audioButton" type="button" aria-pressed="false">Sound: Off</button>
+          <button class="button secondary small" id="fullscreenButton" type="button">Fullscreen</button>
+          <button class="button secondary small" id="resetButton" type="button" title="Reset the round and return to Classic (R)">Reset · R</button>
+        </div>
+        <p class="mode-note" id="modeDescription"></p>
+        <p class="best-note"><span id="modeBest">Classic best: 0</span><span id="roundStatus">Ready when you are</span></p>
+        <p class="controls-note">Move: ← → or A / D, or drag in the arena. Space starts or retries outside a round. H opens this panel. Escape closes it. Reset returns to Classic.</p>
+        <p class="result-line" id="resultLine" role="status" aria-live="polite"></p>
+      </section>
 
-    <div class="preset-caption">PREWRITTEN MODES · THESE BUTTONS DO NOT GENERATE CODE</div>
-    <div class="modes" id="modes" role="group" aria-label="Prewritten game modes"></div>
+      <aside class="side">
+        <section class="card side-card">
+          <div class="challenge-head">
+            <h2>Build Your Challenge</h2>
+            <span class="local-tag">LOCAL PROMPTS ONLY</span>
+          </div>
+          <p>These editable prompts are for a real Copilot conversation in your editor. Copying only copies text. This page has no Copilot integration, does not submit prompts, and does not change game rules.</p>
+          <button class="button cyan" id="panelToggle" type="button" aria-expanded="false" aria-controls="challengePanel">Show challenge prompts · H</button>
+          <div class="challenge-panel" id="challengePanel" hidden>
+            <p><strong>Honest workflow:</strong> choose a new rule, copy the prompt to your editor, submit it yourself, inspect the real diff, review and save, reload this page, select the new mode, then play. Keep the untouched file backed up. Live edits can take longer than a minute.</p>
+            <div id="promptList"></div>
+            <div class="fallback">
+              <h3>PREPARED FALLBACK · PREWRITTEN CODE · NOT A LIVE COPILOT EDIT</h3>
+              <p>If the live edit is not ready at 20 seconds, say so openly and launch a prepared mode. These buttons select existing modes only. They do not generate or claim any requested feature.</p>
+              <div class="fallback-modes" id="fallbackModes"></div>
+            </div>
+            <div class="source-note">
+              <strong>Backup and restore:</strong> save an untouched copy of this file before any editor changes. “Download loaded HTML” captures the version this page loaded, not a guaranteed original. Gameplay reset does not undo source edits. Reload uses the saved edited file; restore the untouched copy in your editor between visitors. Reopen your backup once to confirm it works without starting duplicate game loops.
+            </div>
+          </div>
+        </section>
 
-    <footer class="footer">
-      <span>
-        <kbd>←</kbd> <kbd>→</kbd> Move &nbsp;
-        <kbd>Space</kbd> Play &nbsp;
-        <kbd>R</kbd> Reset &nbsp;
-        <kbd>H</kbd> Challenge panel
-      </span>
-      <span><strong>Can you survive your own prompt?</strong></span>
-    </footer>
+        <section class="card side-card">
+          <h2>Make the demo real</h2>
+          <p>Show the request, actual Copilot activity, reviewed code diff, and playable result. Never say a feature was generated unless you can point to the code change and test it.</p>
+          <ol class="workflow">
+            <li><strong>Ask:</strong> pick one new rule and copy its prompt.</li>
+            <li><strong>Review:</strong> show the actual changed lines and test the behavior.</li>
+            <li><strong>Play:</strong> save, reload, choose the new mode, then start.</li>
+          </ol>
+          <button class="button secondary small" id="backupButton" type="button">Download loaded HTML</button>
+          <p class="source-note">No network requests, external assets, fonts, libraries, or runtime dependencies. Sound is off by default. Best scores are saved locally when storage is available.</p>
+        </section>
+      </aside>
+    </div>
+    <footer class="footer">A tiny arcade game for making ideas visible. MIT licensed. Keep it playful, review the code, and play fair.</footer>
   </main>
-
-  <aside class="host" id="host" aria-labelledby="host-title" hidden>
-    <div class="panel-header">
-      <h2 id="host-title">✨ Build Your Challenge</h2>
-      <button class="utility" id="host-close" type="button"
-        aria-label="Close challenge panel">✕</button>
-    </div>
-
-    <p>The Copilot showcase happens in your editor.
-      These challenge ideas are not implemented in this baseline.</p>
-
-    <span class="host-tag">LIVE DEMO: COPY → EDIT → REVIEW → PLAY</span>
-    <ol>
-      <li>Keep Copilot and the browser visible side by side.</li>
-      <li>Let the visitor choose a new rule and copy its prompt.</li>
-      <li>Paste into Copilot in your editor. Review the actual changes.</li>
-      <li>Save the file, reload this page, and play the new feature.</li>
-    </ol>
-
-    <div class="challenge-grid" id="challenges"
-      role="group" aria-label="Choose a new feature prompt"></div>
-    <p id="challenge-description"></p>
-
-    <label for="host-prompt">Editable prompt for a real code change</label>
-    <textarea id="host-prompt" spellcheck="false"></textarea>
-
-    <div class="host-actions">
-      <button class="utility" id="host-copy" type="button">📋 Copy prompt</button>
-      <button class="utility" id="host-select" type="button">Select text</button>
-    </div>
-    <p id="host-status" role="status" aria-live="polite"></p>
-
-    <h3>⏱ Prepared fallback demo</h3>
-    <span class="host-tag fallback">PREWRITTEN CODE · NOT A LIVE COPILOT EDIT</span>
-    <p>If an edit takes too long, say:
-      “Here is a prepared variation while the live change finishes.”
-      These buttons launch existing modes, not the new features above.</p>
-
-    <div class="fallback-grid" id="fallbacks"
-      role="group" aria-label="Launch a prepared fallback"></div>
-
-    <h3>↻ Between visitors</h3>
-    <div class="host-actions">
-      <button class="utility" id="host-reset" type="button">Reset round</button>
-      <button class="utility" id="backup" type="button">Download loaded source</button>
-    </div>
-    <p class="note">
-      Before the first edit, download this source and keep an untouched copy.
-      To undo live edits, restore that file in your editor, then reload.
-      Reset round clears gameplay only. Reload runs the currently saved code.
-      Download captures the version loaded by this page, not a guaranteed original.
-    </p>
-    <p>
-      H opens or closes this panel. Escape closes it.
-      Opening it does not pause the countdown or round.
-      Copying a prompt does not submit it to Copilot.
-    </p>
-  </aside>
 
   <script>
     "use strict";
 
-    // Capture source before runtime buttons, scores, or canvas sizes mutate the DOM.
-    // This is the loaded version; save it BEFORE performing live source edits.
-    const LOADED_SOURCE = "<!doctype html>\n" + document.documentElement.outerHTML;
+    // Capture the loaded standalone source before this script changes runtime DOM state.
+    const loadedHtml = "<!doctype html>\n" + document.documentElement.outerHTML;
 
-    const ROUND_SECONDS = 15;
-    const COUNTDOWN_SECONDS = 3;
+    // Modes share one configuration source so the selector and fallback cannot drift apart.
+    const MODES = [
+      { id: "classic", name: "Classic", scale: 1, speed: 1, description: "Classic: dodge the falling sprinkled donuts.", coffee: false, chaos: false },
+      { id: "big-head", name: "Big Head", scale: 1.65, speed: .9, description: "Big Head: a larger ship, with slightly gentler falling speed.", coffee: false, chaos: false },
+      { id: "chaos", name: "Chaos", scale: 1, speed: 1, description: "Chaos: donuts sway in independent 35px sine-wave zigzags.", coffee: false, chaos: true },
+      { id: "tiny-victory", name: "Tiny Victory", scale: .65, speed: 1.45, description: "Tiny Victory: a tiny ship, with a faster challenge.", coffee: false, chaos: false },
+      { id: "coffee-break", name: "Coffee Break", scale: 1, speed: 1, description: "Coffee Break: take your coffee for a wobbling, steamy ride.", coffee: true, chaos: false }
+    ];
 
-    // Tune difficulty here after rehearsing on the actual conference screen.
     const DIFFICULTY = {
-      startSpeed: 0.62,       // Arena heights per second.
-      endSpeed: 0.95,
-      startInterval: 0.30,    // Seconds between drops before width scaling.
-      endInterval: 0.16,
-      laneDropChance: 0.35,  // Aim once at spawn, never chase afterward.
+      startSpeed: .62,
+      endSpeed: .95,
+      startSpawnInterval: .30,
+      endSpawnInterval: .16,
+      laneDropChance: .35,
       closePassMargin: 19,
-      closePassBonus: 75
+      closePassBonus: 75,
+      roundSeconds: 15
     };
 
-    // These are the prepared modes. New-feature prompts live separately below.
-    const MODES = {
-      classic: {
-        title: "🍩 Classic",
-        label: "CLASSIC FLIGHT",
-        description: "The harder original",
-        scale: 1, speed: 1, zigzag: false
-      },
-      big: {
-        title: "🚀 Big Head",
-        label: "BIG HEAD ENERGY",
-        description: "Bigger ship. Less room.",
-        scale: 1.65, speed: 0.9, zigzag: false
-      },
-      chaos: {
-        title: "🌀 Chaos",
-        label: "DONUT DANCE PARTY",
-        description: "Weaving frosting hazards",
-        scale: 1, speed: 1, zigzag: true
-      },
-      tiny: {
-        title: "⚡ Tiny Victory",
-        label: "TINY SHIP, BIG DREAMS",
-        description: "Small ship. Faster storm.",
-        scale: 0.65, speed: 1.45, zigzag: false
-      },
-      coffee: {
-        title: "☕ Coffee Break",
-        label: "CAUTION: COSMIC COFFEE",
-        description: "Same challenge, fresh brew",
-        scale: 1, speed: 1, zigzag: false
-      }
-    };
-
-    // None of these four features is implemented in the baseline.
-    // The host copies a prompt, then shows Copilot making a real source edit.
-    const CHALLENGES = [
+    // These are prompts for future code changes, not features implemented in this baseline.
+    const PROMPTS = [
       {
-        title: "🎯 Homing Donuts",
-        summary: "Make the snacks chase me.",
-        description: "New feature: obstacles steer toward the ship as they fall.",
-        prompt:
-          "In index.html, add a new Homing Donuts mode with ID homing. " +
-          "In that mode only, falling donuts should steer horizontally toward " +
-          "the spaceship at a maximum of 80 CSS pixels per second while " +
-          "maintaining their downward movement. Give them distinctive red " +
-          "frosting. Use the visible position for collision detection. Keep " +
-          "the existing one-time lane-targeted spawning separate from homing. " +
-          "Add the new mode to the selectors and label it clearly."
+        title: "Homing Donuts mode",
+        text: "Add a new prewritten mode named Homing Donuts to this game. In this mode only, each donut continuously steers its horizontal position toward the ship while falling, with horizontal speed capped at 80 CSS pixels per second. Give homing donuts red frosting. Collision checks must use the donut's current steered x position. Keep the existing one-time lane targeting at spawn distinct from continuous homing. Do not duplicate a feature that already exists. Make real code edits, not fake AI or simulated generation. Preserve current features and all existing modes. Add no dependencies. Add concise comments where useful. Explain the diff and list manual tests to run. Test mode-only steering, the speed cap, collision at the current x, and unchanged behavior in other modes."
       },
       {
-        title: "🛡 Emergency Shield",
-        summary: "One chance to block a hit.",
-        description: "New feature: activate one short-lived shield per round.",
-        prompt:
-          "In index.html, add a new Shield mode with ID shield. In that mode " +
-          "only, the player can press Space during gameplay or tap a visible " +
-          "Shield button to activate a glowing cyan shield for 1.5 seconds, " +
-          "once per round. While active, it absorbs one collision, removes " +
-          "that obstacle, and then ends. Show READY, ACTIVE, or USED status. " +
-          "Reset shield state on every new round. Keep Space-to-start outside " +
-          "gameplay and prevent key-repeat from triggering extra actions."
+        title: "Emergency Shield mode",
+        text: "Add a new prewritten mode named Emergency Shield. Once per round, Space or a visible touch-friendly button activates a shield for 1.5 seconds. The shield absorbs one collision by removing that obstacle, then ends. Show READY, ACTIVE, and USED status. Reset the shield for each new round. Avoid key-repeat activation, and preserve Space to start or retry outside gameplay. Do not duplicate a feature that already exists. Make real code edits, not fake AI or simulated generation. Preserve current features and all existing modes. Add no dependencies. Add concise comments where useful. Explain the diff and list manual tests to run, including mode isolation, collision absorption, status transitions, reset, touch, and key repeat."
       },
       {
-        title: "🔀 Reverse Controls",
-        summary: "Left becomes right halfway.",
-        description: "New feature: announce a control reversal at 7.5 seconds.",
-        prompt:
-          "In index.html, add a new Reverse Controls mode with ID reverse. " +
-          "In that mode only, show a clear warning one second before elapsed " +
-          "gameplay time reaches 7.5 seconds. At 7.5 seconds, reverse keyboard " +
-          "left/right movement and mirror touch target positions across the " +
-          "arena center. Show CONTROLS REVERSED for the remaining round. " +
-          "Do not alter countdown controls or other modes."
+        title: "Reverse Controls mode",
+        text: "Add a new prewritten mode named Reverse Controls. At 6.5 seconds remaining show a clear warning. At 7.5 seconds remaining reverse Arrow and A/D movement and mirror touch/pointer x positions. Keep a visible reversed-controls status until the round ends. Other modes and countdown controls must remain unchanged. Do not duplicate a feature that already exists. Make real code edits, not fake AI or simulated generation. Preserve current features and all existing modes. Add no dependencies. Add concise comments where useful. Explain the diff and list manual tests for warning timing, keyboard and touch inversion, return to normal at round end, and other modes."
       },
       {
-        title: "🪃 Boomerang Donuts",
-        summary: "Dodged donuts return.",
-        description: "New feature: obstacles make one upward return pass.",
-        prompt:
-          "In index.html, add a new Boomerang mode with ID boomerang. In that " +
-          "mode only, a donut that fully exits the bottom should turn around " +
-          "and travel upward once, at 75 percent of its original speed, at " +
-          "the same horizontal position. Change its frosting color for the " +
-          "return trip and show a brief bottom-edge warning. Remove it after " +
-          "it exits the top. Keep collision detection active both ways, avoid " +
-          "duplicate close-pass bonuses, and award its dodge points only " +
-          "after the return trip is complete."
+        title: "Boomerang mode",
+        text: "Add a new prewritten mode named Boomerang. Each obstacle returns upward once, at 75% of its original downward speed, only after it has fully exited the bottom. Keep its x position unchanged, change its color on return, and show a bottom-edge warning. Returning obstacles remain collidable in both directions and are removed only after exiting the top. Award dodge points once, after completed bottom exit, and never duplicate close-pass bonuses. Do not duplicate a feature that already exists. Make real code edits, not fake AI or simulated generation. Preserve current features and all existing modes. Add no dependencies. Add concise comments where useful. Explain the diff and list manual tests for turning only after full exit, speed, x position, warning, two-way collision, removal, and one-time scoring."
       }
     ];
 
-    const GUARDRAILS =
-      "\n\nThis must be a real code change, not a fake AI animation or a " +
-      "button that claims to generate code. Keep existing modes unchanged. " +
-      "Preserve the three-second countdown, 15-second round, optional audio, " +
-      "host panel, local scores, fullscreen, and reset. Use plain JavaScript " +
-      "with no dependencies. Add short comments explaining new logic. " +
-      "Explain the changed code and give a brief manual test checklist. " +
-      "If the feature already exists, explain that rather than duplicating it.";
-
-    const $ = id => document.getElementById(id);
-    const canvas = $("game");
+    const canvas = document.getElementById("arena");
     const ctx = canvas.getContext("2d");
-    const colors = ["#ff70c6", "#8e85ff", "#71f5ff", "#ffe478"];
-    const keys = new Set();
-    const modeButtons = [];
-    const fallbackButtons = [];
-    const challengeButtons = [];
-    const sessionBests = {};
-    const ship = { x: 0, y: 0 };
-    const stars = Array.from({ length: 80 }, () => ({
-      x: Math.random(), y: Math.random(),
-      radius: 0.4 + Math.random() * 1.6,
-      depth: 0.2 + Math.random() * 0.8
+    const overlay = document.getElementById("gameOverlay");
+    const overlayTitle = document.getElementById("overlayTitle");
+    const overlaySubtitle = document.getElementById("overlaySubtitle");
+    const overlayHint = document.getElementById("overlayHint");
+    const startButton = document.getElementById("startButton");
+    const modeSelect = document.getElementById("modeSelect");
+    const timeReadout = document.getElementById("timeReadout");
+    const scoreReadout = document.getElementById("scoreReadout");
+    const nearReadout = document.getElementById("nearReadout");
+    const modeBest = document.getElementById("modeBest");
+    const modeDescription = document.getElementById("modeDescription");
+    const resultLine = document.getElementById("resultLine");
+    const roundStatus = document.getElementById("roundStatus");
+    const panel = document.getElementById("challengePanel");
+    const panelToggle = document.getElementById("panelToggle");
+    const promptList = document.getElementById("promptList");
+    const fallbackModes = document.getElementById("fallbackModes");
+    const audioButton = document.getElementById("audioButton");
+
+    for (const mode of MODES) {
+      const option = document.createElement("option");
+      option.value = mode.id;
+      option.textContent = mode.name;
+      modeSelect.append(option);
+      const launch = document.createElement("button");
+      launch.className = "button secondary small";
+      launch.type = "button";
+      launch.textContent = `Play ${mode.name}`;
+      launch.dataset.mode = mode.id;
+      launch.setAttribute("aria-label", `Select prewritten ${mode.name} game mode`);
+      fallbackModes.append(launch);
+    }
+
+    for (const prompt of PROMPTS) {
+      const article = document.createElement("article");
+      article.className = "prompt-card";
+      const title = document.createElement("h3");
+      title.className = "prompt-title";
+      title.textContent = prompt.title;
+      const textarea = document.createElement("textarea");
+      textarea.value = prompt.text;
+      textarea.setAttribute("aria-label", `${prompt.title} prompt, editable`);
+      textarea.spellcheck = false;
+      const actions = document.createElement("div");
+      actions.className = "prompt-actions";
+      const copy = document.createElement("button");
+      copy.className = "button cyan small";
+      copy.type = "button";
+      copy.textContent = "Copy prompt";
+      copy.dataset.copyPrompt = "true";
+      const status = document.createElement("p");
+      status.className = "copy-status";
+      status.setAttribute("aria-live", "polite");
+      actions.append(copy);
+      article.append(title, textarea, actions, status);
+      promptList.append(article);
+    }
+
+    let selectedMode = MODES[0];
+    let state = "idle";
+    let countdownElapsed = 0;
+    let roundElapsed = 0;
+    let roundScore = 0;
+    let dodged = 0;
+    let nearMisses = 0;
+    let spawnElapsed = 0;
+    let lastFrame = 0;
+    let pausedForHiddenTab = false;
+    let keys = new Set();
+    let pointerActive = false;
+    let pointerTarget = null;
+    let obstacles = [];
+    let confetti = [];
+    let audioEnabled = false;
+    let audioContext = null;
+    let audioGeneration = 0;
+    const activeVoices = new Set();
+    const bestScores = Object.create(null);
+    const stars = Array.from({ length: 76 }, (_, i) => ({
+      x: ((i * 173.37) % 997) / 997,
+      y: ((i * 317.71) % 991) / 991,
+      size: .5 + ((i * 23) % 17) / 10,
+      phase: (i * .83) % (Math.PI * 2)
     }));
 
-    let width = 0, height = 0, lastFrame = null, visualTime = 0;
-    let state = "ready", mode = "classic";
-    let elapsed = 0, score = 0, dodged = 0, nearMisses = 0, best = 0;
-    let spawnClock = 0, countdownRemaining = 0, goRemaining = 0;
-    let obstacles = [], particles = [], popups = [];
-    let pointerTarget = null, dragging = false;
-    let roundToken = 0, copyAttempt = 0;
+    const ship = { x: 0, y: 0, radius: 17, width: 42, height: 49, angle: 0 };
+    let arenaWidth = 1;
+    let arenaHeight = 1;
+    let dpr = 1;
 
-    // Sound starts muted and is synthesized locally, with no audio downloads.
-    let soundEnabled = false, audioContext = null, masterGain = null;
-    const activeVoices = new Set();
+    function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
+    function currentModeLocked() { return state === "countdown" || state === "playing"; }
+    function canStart() { return state === "idle" || state === "ended"; }
+    function getBest(mode) {
+      if (bestScores[mode.id] !== undefined) return bestScores[mode.id];
+      try {
+        const stored = Number(localStorage.getItem(`dtd-best-v1-${mode.id}`));
+        bestScores[mode.id] = Number.isFinite(stored) && stored > 0 ? stored : 0;
+      } catch (_) {
+        bestScores[mode.id] = 0;
+      }
+      return bestScores[mode.id];
+    }
+    function saveBest(mode, score) {
+      const best = getBest(mode);
+      if (score <= best) return best;
+      bestScores[mode.id] = score;
+      try { localStorage.setItem(`dtd-best-v1-${mode.id}`, String(score)); } catch (_) { /* Keep this session's score in memory. */ }
+      return score;
+    }
+    function updateBestLabel() {
+      modeBest.textContent = `${selectedMode.name} best: ${getBest(selectedMode)}`;
+    }
+    function updateScore() {
+      roundScore = Math.floor(roundElapsed * 100) + dodged * 25 + nearMisses * DIFFICULTY.closePassBonus;
+      scoreReadout.textContent = String(roundScore);
+      nearReadout.textContent = String(nearMisses);
+      timeReadout.textContent = state === "playing"
+        ? Math.max(0, DIFFICULTY.roundSeconds - roundElapsed).toFixed(1)
+        : state === "countdown" ? "3.0" : state === "ended" ? "0.0" : DIFFICULTY.roundSeconds.toFixed(1);
+    }
+    function setOverlay(title, subtitle, hint, visible = true) {
+      overlayTitle.textContent = title;
+      overlaySubtitle.textContent = subtitle;
+      overlayHint.textContent = hint;
+      overlay.hidden = !visible;
+    }
+    function updateControls() {
+      const locked = currentModeLocked();
+      modeSelect.disabled = locked;
+      startButton.disabled = locked;
+      startButton.textContent = state === "ended" ? "Play again" : state === "countdown" ? "Get ready…" : state === "playing" ? "Round in progress" : "Start round";
+      startButton.setAttribute("aria-label", startButton.textContent);
+      panelToggle.setAttribute("aria-expanded", String(!panel.hidden));
+      panelToggle.textContent = panel.hidden ? "Show challenge prompts · H" : "Hide challenge prompts · H";
+      modeDescription.innerHTML = `<strong>${selectedMode.name}</strong> · ${selectedMode.description}`;
+      roundStatus.textContent = state === "playing" ? "Round live" : state === "countdown" ? "Countdown" : state === "ended" ? "Round complete" : "Ready when you are";
+      updateBestLabel();
+    }
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      arenaWidth = Math.max(1, rect.width);
+      arenaHeight = Math.max(1, rect.height);
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(arenaWidth * dpr);
+      canvas.height = Math.round(arenaHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ship.y = arenaHeight - 58;
+      ship.x = clamp(ship.x || arenaWidth / 2, ship.radius + 5, arenaWidth - ship.radius - 5);
+      ship.width = 42 * selectedMode.scale;
+      ship.height = 49 * selectedMode.scale;
+      ship.radius = 15 * selectedMode.scale;
+      for (const obstacle of obstacles) obstacle.x = clamp(obstacle.x, 10, arenaWidth - 10);
+    }
+    new ResizeObserver(resizeCanvas).observe(canvas);
 
-    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-    const mix = (a, b, fraction) => a + (b - a) * fraction;
-
-    function roundBusy() {
-      return state === "countdown" || state === "running";
+    function setMode(id) {
+      if (currentModeLocked()) return;
+      const mode = MODES.find((entry) => entry.id === id);
+      if (!mode) return;
+      selectedMode = mode;
+      modeSelect.value = mode.id;
+      ship.width = 42 * mode.scale;
+      ship.height = 49 * mode.scale;
+      ship.radius = 15 * mode.scale;
+      resultLine.textContent = "";
+      updateControls();
     }
 
-    function setStatus(message) {
-      $("host-status").textContent = message;
+    function initializeAudio() {
+      if (audioContext || !audioEnabled) return;
+      const AudioContextType = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextType) {
+        audioEnabled = false;
+        audioButton.textContent = "Sound unavailable";
+        audioButton.disabled = true;
+        return;
+      }
+      try {
+        audioContext = new AudioContextType();
+        const generation = audioGeneration;
+        const resumed = audioContext.resume();
+        if (resumed && typeof resumed.then === "function") {
+          resumed.then(() => {
+            if (!audioEnabled || generation !== audioGeneration) audioContext.suspend().catch(() => {});
+          }).catch(() => {});
+        }
+      } catch (_) {
+        audioEnabled = false;
+        audioButton.textContent = "Sound unavailable";
+      }
     }
-
-    function updateSoundButton() {
-      $("sound-toggle").textContent = soundEnabled ? "🔊 Sound on" : "🔇 Sound off";
-      $("sound-toggle").setAttribute("aria-pressed", String(soundEnabled));
-    }
-
-    function stopSounds() {
-      // Stop both playing notes and future notes scheduled by a jingle.
-      for (const oscillator of activeVoices) {
-        try { oscillator.stop(); } catch {}
+    function cancelAudio() {
+      audioGeneration += 1;
+      for (const voice of activeVoices) {
+        try { voice.stop(); } catch (_) { /* An already-ended oscillator needs no further cleanup. */ }
       }
       activeVoices.clear();
+      if (audioContext && audioEnabled) audioContext.suspend().catch(() => {});
     }
-
-    async function prepareAudio() {
-      if (!soundEnabled) return false;
+    function tone(frequency, duration = .12, waveform = "sine", volume = .035, delay = 0) {
+      if (!audioEnabled || !audioContext) return;
+      const generation = audioGeneration;
+      if (audioContext.state === "suspended") audioContext.resume().catch(() => {});
       try {
-        if (!audioContext) {
-          audioContext = new AudioContext();
-          masterGain = audioContext.createGain();
-          masterGain.gain.value = 0.10;
-          masterGain.connect(audioContext.destination);
-        }
-        if (audioContext.state !== "running") await audioContext.resume();
-        return soundEnabled && audioContext.state === "running";
-      } catch {
-        soundEnabled = false;
-        stopSounds();
-        updateSoundButton();
-        setStatus("Audio unavailable. The game will continue silently.");
-        return false;
-      }
+        const now = audioContext.currentTime + delay;
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        oscillator.type = waveform;
+        oscillator.frequency.setValueAtTime(frequency, now);
+        gain.gain.setValueAtTime(.0001, now);
+        gain.gain.exponentialRampToValueAtTime(Math.max(.0002, volume), now + .012);
+        gain.gain.setValueAtTime(Math.max(.0002, volume), now + Math.max(.025, duration - .035));
+        gain.gain.exponentialRampToValueAtTime(.0001, now + duration);
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+        activeVoices.add(oscillator);
+        oscillator.onended = () => {
+          activeVoices.delete(oscillator);
+          oscillator.disconnect();
+          gain.disconnect();
+        };
+        if (generation !== audioGeneration || !audioEnabled) return;
+        oscillator.start(now);
+        oscillator.stop(now + duration + .015);
+      } catch (_) { /* Audio is an optional enhancement. */ }
+    }
+    function playJingle(notes) {
+      notes.forEach(([frequency, delay, duration]) => tone(frequency, duration, "triangle", .035, delay));
     }
 
-    function tone(frequency, duration = .12, delay = 0, type = "square") {
-      if (!soundEnabled || document.hidden ||
-          !audioContext || audioContext.state !== "running") return;
-
-      const oscillator = audioContext.createOscillator();
-      const envelope = audioContext.createGain();
-      const start = audioContext.currentTime + delay;
-      oscillator.type = type;
-      oscillator.frequency.setValueAtTime(frequency, start);
-
-      // A short volume envelope softens note starts and ends.
-      envelope.gain.setValueAtTime(0, start);
-      envelope.gain.linearRampToValueAtTime(.6, start + .008);
-      envelope.gain.exponentialRampToValueAtTime(.001, start + duration);
-      oscillator.connect(envelope);
-      envelope.connect(masterGain);
-      activeVoices.add(oscillator);
-      oscillator.onended = () => {
-        oscillator.disconnect();
-        envelope.disconnect();
-        activeVoices.delete(oscillator);
-      };
-      oscillator.start(start);
-      oscillator.stop(start + duration + .02);
-    }
-
-    function playSound(name) {
-      if (name === "tick") tone(440, .09);
-      if (name === "go") {
-        tone(660, .1);
-        tone(990, .18, .1);
-      }
-      if (name === "warning") tone(880, .06, 0, "triangle");
-      if (name === "near") tone(1200, .04, 0, "triangle");
-      if (name === "win") {
-        [523, 659, 784, 1047].forEach((note, i) => tone(note, .18, i * .12, "triangle"));
-      }
-      if (name === "lose") {
-        [330, 247, 165].forEach((note, i) => tone(note, .18, i * .13, "sawtooth"));
-      }
-    }
-
-    function readBest() {
-      let stored = 0;
-      try {
-        // Versioned key keeps the harder game's scores separate from earlier builds.
-        const value = Number(localStorage.getItem(`donut-hard-v1-${mode}`));
-        if (Number.isFinite(value) && value > 0) stored = value;
-      } catch {}
-      return Math.max(stored, sessionBests[mode] || 0);
-    }
-
-    function clearInput() {
+    function startRound() {
+      if (!canStart() || pausedForHiddenTab) return;
+      cancelAudio();
+      obstacles = [];
+      confetti = [];
+      roundElapsed = 0;
+      roundScore = 0;
+      dodged = 0;
+      nearMisses = 0;
+      spawnElapsed = 0;
+      countdownElapsed = 0;
       keys.clear();
-      dragging = false;
+      pointerActive = false;
       pointerTarget = null;
-    }
-
-    function updateHUD() {
-      $("time").textContent = Math.max(0, ROUND_SECONDS - elapsed).toFixed(1);
-      $("score").textContent = String(score).padStart(4, "0");
-      $("best").textContent = String(best).padStart(4, "0");
-      $("near").textContent = String(nearMisses);
-      $("progress").style.transform =
-        `scaleX(${Math.max(0, 1 - elapsed / ROUND_SECONDS)})`;
-    }
-
-    function syncControls() {
-      const busy = roundBusy();
-      modeButtons.forEach(button => {
-        button.disabled = busy;
-        button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
-      });
-      fallbackButtons.forEach(button => { button.disabled = busy; });
-    }
-
-    function setMode(nextMode) {
-      if (roundBusy()) return;
-      mode = nextMode;
-      best = readBest();
-      $("mode-label").textContent = MODES[mode].label;
-      syncControls();
-      updateHUD();
-    }
-
-    function showCard(icon, title, description, button) {
-      $("card-icon").textContent = icon;
-      $("card-title").textContent = title;
-      $("card-description").textContent = description;
-      $("start").textContent = button;
-      $("overlay").hidden = false;
-    }
-
-    function showCountdown(text, caption) {
-      $("countdown").hidden = false;
-      $("countdown-number").textContent = text;
-      $("countdown-caption").textContent = caption;
-      const number = $("countdown-number");
-      number.classList.remove("pop");
-      void number.offsetWidth;
-      number.classList.add("pop");
-    }
-
-    function clearCountdown() {
-      countdownRemaining = goRemaining = 0;
-      $("countdown").hidden = true;
-    }
-
-    function reset() {
-      roundToken++;
-      stopSounds();
-      clearCountdown();
-      clearInput();
-      state = "ready";
-      elapsed = score = dodged = nearMisses = spawnClock = 0;
-      obstacles = [];
-      particles = [];
-      popups = [];
-      ship.x = width / 2;
-      setMode("classic");
-      showCard("🚀", "Ready for the sugar storm?",
-        "Faster drops. More donuts. Close passes earn bonus points. " +
-        "Survive 15 seconds.", "LET'S FLY ✨");
-    }
-
-    function start() {
-      if (roundBusy()) return;
-      const token = ++roundToken;
-      stopSounds();
-      clearCountdown();
-      clearInput();
-      elapsed = score = dodged = nearMisses = 0;
-      obstacles = [];
-      particles = [];
-      popups = [];
-      spawnClock = .3;
-      ship.x = width / 2;
+      ship.x = arenaWidth / 2;
+      ship.angle = 0;
       state = "countdown";
-      countdownRemaining = COUNTDOWN_SECONDS;
-      $("overlay").hidden = true;
-      showCountdown("3", "GET READY, SUGAR PILOT");
+      resultLine.textContent = "";
+      setOverlay("3", "Get ready to dodge!", "Starting in three…");
+      roundStatus.textContent = "Countdown";
+      tone(560, .11, "sine", .035);
+      updateScore();
+      updateControls();
+    }
 
-      // This is invoked by a click/key interaction, not an automatic timer.
-      void prepareAudio().then(ready => {
-        if (ready && token === roundToken && state === "countdown" &&
-            Math.ceil(countdownRemaining) === COUNTDOWN_SECONDS) playSound("tick");
+    function resetGame() {
+      cancelAudio();
+      state = "idle";
+      selectedMode = MODES[0];
+      modeSelect.value = selectedMode.id;
+      roundElapsed = 0;
+      roundScore = 0;
+      dodged = 0;
+      nearMisses = 0;
+      countdownElapsed = 0;
+      spawnElapsed = 0;
+      obstacles = [];
+      confetti = [];
+      keys.clear();
+      pointerActive = false;
+      pointerTarget = null;
+      ship.x = arenaWidth / 2;
+      resultLine.textContent = "";
+      timeReadout.textContent = DIFFICULTY.roundSeconds.toFixed(1);
+      scoreReadout.textContent = "0";
+      nearReadout.textContent = "0";
+      setOverlay("READY?", "The donuts are falling. Stay frosty.", "Press Space or tap Start round");
+      updateControls();
+    }
+
+    function spawnObstacle() {
+      const radius = 14 + Math.random() * 7;
+      const laneTarget = Math.random() < DIFFICULTY.laneDropChance;
+      const target = laneTarget
+        ? ship.x + (Math.random() * 70 - 35)
+        : 18 + Math.random() * Math.max(1, arenaWidth - 36);
+      obstacles.push({
+        x: clamp(target, radius + 2, arenaWidth - radius - 2),
+        y: -radius - 4,
+        radius,
+        speed: arenaHeight * selectedMode.speed,
+        rotation: Math.random() * Math.PI * 2,
+        spin: (Math.random() < .5 ? -1 : 1) * (.8 + Math.random() * 2),
+        color: ["#ff65b8", "#ffbd4a", "#a56aff", "#58eaff"][Math.floor(Math.random() * 4)],
+        phase: Math.random() * Math.PI * 2,
+        wave: Math.random() * Math.PI * 2,
+        closest: Infinity,
+        nearAwarded: false,
+        passed: false
       });
-      syncControls();
-      updateHUD();
     }
 
-    function beginRound() {
-      state = "running";
-      goRemaining = .45;
-      clearInput();
-      showCountdown("GO!", "SURVIVE THE SUGAR STORM");
-      playSound("go");
-      syncControls();
+    function finishRound(collision = false) {
+      if (state !== "playing") return;
+      roundElapsed = Math.min(DIFFICULTY.roundSeconds, roundElapsed);
+      state = "ended";
+      keys.clear();
+      pointerActive = false;
+      const won = !collision && roundElapsed >= DIFFICULTY.roundSeconds - .02;
+      const best = saveBest(selectedMode, roundScore);
+      if (won) {
+        setOverlay("YOU WIN!", selectedMode.coffee ? "A perfect coffee break!" : "You survived the donut storm!", "Press Space or tap Play again");
+        resultLine.textContent = selectedMode.coffee
+          ? `Freshly brewed! ${roundScore} points, ${nearMisses} close passes.`
+          : `Sweet survival! ${roundScore} points, ${dodged} dodged, ${nearMisses} close passes.`;
+        playJingle([[523, 0, .18], [659, .13, .18], [784, .26, .3]]);
+        addConfetti();
+      } else {
+        setOverlay("DONUT DOWN!", selectedMode.coffee ? "That coffee break got bumpy." : "The sprinkles got you this time!", "Press Space or tap Play again");
+        resultLine.textContent = `${selectedMode.coffee ? "Coffee spilled" : "Round over"}: ${roundScore} points, ${nearMisses} close passes. Best: ${best}.`;
+        playJingle([[330, 0, .2], [262, .16, .32]]);
+      }
+      updateScore();
+      updateControls();
     }
 
-    function burst(x, y, count, confetti = false) {
-      for (let i = 0; i < count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = 60 + Math.random() * 260;
-        const life = .7 + Math.random() * .8;
-        particles.push({
-          x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
-          life, maxLife: life, size: 2 + Math.random() * 5,
-          color: colors[i % colors.length], confetti
+    function addConfetti() {
+      for (let i = 0; i < 90; i += 1) {
+        confetti.push({
+          x: Math.random() * arenaWidth,
+          y: -Math.random() * arenaHeight * .4,
+          vx: (Math.random() - .5) * 100,
+          vy: 80 + Math.random() * 170,
+          size: 3 + Math.random() * 6,
+          color: ["#ff58c8", "#64f5ff", "#ffe66d", "#a56aff"][i % 4],
+          spin: Math.random() * 6
         });
       }
     }
 
-    function finish(won) {
-      state = won ? "won" : "lost";
-      clearCountdown();
-      stopSounds();
-      playSound(won ? "win" : "lose");
-      clearInput();
-
-      if (score > best) {
-        best = score;
-        sessionBests[mode] = best;
-        try { localStorage.setItem(`donut-hard-v1-${mode}`, String(best)); } catch {}
+    function updateCountdown(dt) {
+      const previous = Math.floor(countdownElapsed);
+      countdownElapsed += dt;
+      const current = Math.floor(countdownElapsed);
+      if (current < 3 && current !== previous) {
+        const number = 3 - current;
+        setOverlay(String(number), "Get ready to dodge!", number === 1 ? "Last second…" : `Starting in ${number}…`);
+        tone(number === 1 ? 760 : 600, .1, "sine", .035);
       }
-
-      const coffee = mode === "coffee";
-      if (won) {
-        for (let i = 0; i < 5; i++) burst(width * (i + 1) / 6, height * .35, 30, true);
-        showCard("🏆", coffee ? "Espresso escape!" : "You're unglazeable!",
-          `${score} points. ${nearMisses} close passes. ` +
-          `${dodged} ${coffee ? "cups" : "donuts"} dodged.`, "ONE MORE ROUND ✨");
-      } else {
-        burst(ship.x, ship.y, 40);
-        showCard(coffee ? "☕" : "🍩",
-          coffee ? "You've been brewed!" : "You've been glazed!",
-          `${elapsed.toFixed(1)} seconds survived. ${score} points. ` +
-          "Try short, deliberate dodges.", "TRY AGAIN 🚀");
+      if (countdownElapsed >= 3) {
+        state = "playing";
+        roundElapsed = 0;
+        spawnElapsed = 0;
+        setOverlay("GO!", "Dodge the donuts!", "", true);
+        tone(880, .22, "triangle", .045);
+        roundStatus.textContent = "Round live";
+        updateControls();
       }
-      syncControls();
-      updateHUD();
     }
 
-    function resize() {
-      const rect = canvas.getBoundingClientRect();
-      const oldWidth = width || rect.width;
-      width = rect.width;
-      height = rect.height;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ship.x = ship.x ? ship.x / oldWidth * width : width / 2;
-      ship.y = height - 65;
-      pointerTarget = null;
-      obstacles.forEach(obstacle => {
-        obstacle.baseX *= width / oldWidth;
-        obstacle.x *= width / oldWidth;
-      });
-    }
-
-    function spawnObstacle() {
-      const radius = 18 + Math.random() * 12;
-      const settings = MODES[mode];
-      const margin = radius + (settings.zigzag ? 35 : 0);
-      let x = margin + Math.random() * Math.max(1, width - margin * 2);
-
-      // Sample the player's lane ONCE. This is not the unimplemented homing feature.
-      if (Math.random() < DIFFICULTY.laneDropChance) {
-        x = clamp(ship.x + (Math.random() - .5) * 100, margin, width - margin);
-      }
-      const fraction = elapsed / ROUND_SECONDS;
-      obstacles.push({
-        baseX: x, x, y: -radius * 2, radius,
-        speed: height * mix(DIFFICULTY.startSpeed, DIFFICULTY.endSpeed, fraction) *
-          settings.speed * (.9 + Math.random() * .2),
-        rotation: Math.random() * Math.PI * 2,
-        spin: Math.random() * 2 - 1,
-        phase: Math.random() * Math.PI * 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        closest: Infinity,
-        nearAwarded: false
-      });
-    }
-
-    function update(dt) {
-      visualTime += dt;
-      particles.forEach(p => {
-        p.life -= dt;
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-        p.vy += 130 * dt;
-      });
-      particles = particles.filter(p => p.life > 0);
-      popups.forEach(p => { p.life -= dt; p.y -= 25 * dt; });
-      popups = popups.filter(p => p.life > 0);
-
-      if (state === "countdown") {
-        const before = Math.ceil(countdownRemaining);
-        countdownRemaining = Math.max(0, countdownRemaining - dt);
-        const after = Math.ceil(countdownRemaining);
-        if (countdownRemaining === 0) beginRound();
-        else if (before !== after) {
-          showCountdown(String(after), "GET READY, SUGAR PILOT");
-          playSound("tick");
-        }
+    function updateGame(dt) {
+      if (state !== "playing") return;
+      const oldElapsed = roundElapsed;
+      roundElapsed = Math.min(DIFFICULTY.roundSeconds, roundElapsed + dt);
+      if (roundElapsed >= DIFFICULTY.roundSeconds) {
+        updateScore();
+        finishRound(false);
         return;
       }
-      if (state !== "running") return;
-
-      if (goRemaining > 0) {
-        goRemaining = Math.max(0, goRemaining - dt);
-        if (!goRemaining) $("countdown").hidden = true;
+      for (let warning = 5; warning >= 1; warning -= 1) {
+        if (oldElapsed < DIFFICULTY.roundSeconds - warning && roundElapsed >= DIFFICULTY.roundSeconds - warning) {
+          tone(480 + (5 - warning) * 45, .09, "sine", .024);
+        }
       }
-
-      const previousSeconds = Math.ceil(ROUND_SECONDS - elapsed);
-      elapsed = Math.min(ROUND_SECONDS, elapsed + dt);
-      const seconds = Math.ceil(ROUND_SECONDS - elapsed);
-      if (seconds !== previousSeconds && seconds > 0 && seconds <= 5) playSound("warning");
-
-      const settings = MODES[mode];
-      const direction =
-        Number(keys.has("ArrowRight") || keys.has("d")) -
-        Number(keys.has("ArrowLeft") || keys.has("a"));
-      if (direction) {
-        pointerTarget = null;
-        ship.x += direction * 500 * dt;
-      } else if (pointerTarget !== null) {
-        ship.x += (pointerTarget - ship.x) * (1 - Math.exp(-20 * dt));
-      }
-      const shipMargin = 23 * settings.scale;
-      ship.x = clamp(ship.x, shipMargin, width - shipMargin);
-
-      // Wider screens get more drops, preventing large empty safe lanes.
-      const density = clamp(width / 650, 1, 2);
-      spawnClock -= dt;
-      if (spawnClock <= 0) {
+      const density = clamp(arenaWidth / 800, 1, 2);
+      const ramp = clamp(roundElapsed / DIFFICULTY.roundSeconds, 0, 1);
+      const spawnInterval = (DIFFICULTY.startSpawnInterval + (DIFFICULTY.endSpawnInterval - DIFFICULTY.startSpawnInterval) * ramp) / density;
+      spawnElapsed += dt;
+      while (spawnElapsed >= spawnInterval) {
+        spawnElapsed -= spawnInterval;
         spawnObstacle();
-        spawnClock += mix(
-          DIFFICULTY.startInterval, DIFFICULTY.endInterval,
-          elapsed / ROUND_SECONDS
-        ) / density;
       }
 
+      let direction = 0;
+      if (keys.has("arrowleft") || keys.has("a")) direction -= 1;
+      if (keys.has("arrowright") || keys.has("d")) direction += 1;
+      const shipSpeed = arenaHeight * .78;
+      if (direction) ship.x += direction * shipSpeed * dt;
+      if (pointerActive && pointerTarget !== null) {
+        const difference = pointerTarget - ship.x;
+        ship.x += clamp(difference, -shipSpeed * dt * 1.4, shipSpeed * dt * 1.4);
+      }
+      ship.x = clamp(ship.x, ship.radius + 4, arenaWidth - ship.radius - 4);
+      ship.angle = clamp(direction * -.18, -.2, .2);
+
+      const shipRadius = ship.radius;
       for (const obstacle of obstacles) {
-        obstacle.y += obstacle.speed * dt;
+        const previousX = obstacle.x;
+        obstacle.y += obstacle.speed * dt * (DIFFICULTY.startSpeed + (DIFFICULTY.endSpeed - DIFFICULTY.startSpeed) * ramp) / DIFFICULTY.startSpeed;
+        if (selectedMode.chaos) {
+          obstacle.wave += dt * (2.1 + obstacle.phase % 2);
+          obstacle.x = clamp(previousX + (Math.sin(obstacle.wave) - Math.sin(obstacle.wave - dt * (2.1 + obstacle.phase % 2))) * 35, obstacle.radius, arenaWidth - obstacle.radius);
+        }
         obstacle.rotation += obstacle.spin * dt;
-        obstacle.x = obstacle.baseX + (settings.zigzag
-          ? Math.sin(obstacle.y * .018 + obstacle.phase) * 35 : 0);
 
-        // Visual steam and wing tips never enlarge the forgiving circular hitbox.
-        const hitRadius = obstacle.radius * .78 + 14 * settings.scale;
-        const distance = Math.hypot(obstacle.x - ship.x, obstacle.y - ship.y);
+        const dx = ship.x - obstacle.x;
+        const dy = ship.y - obstacle.y;
+        const distance = Math.hypot(dx, dy);
         obstacle.closest = Math.min(obstacle.closest, distance);
-
-        if (distance < hitRadius) {
-          score = calculateScore();
-          finish(false);
+        const collisionDistance = shipRadius + obstacle.radius * .68;
+        if (distance < collisionDistance) {
+          updateScore();
+          finishRound(true);
           return;
         }
-
-        // Award only after the obstacle has safely cleared the ship vertically.
-        if (!obstacle.nearAwarded && obstacle.y > ship.y + hitRadius) {
-          obstacle.nearAwarded = true;
-          if (obstacle.closest <= hitRadius + DIFFICULTY.closePassMargin) {
-            nearMisses++;
-            popups.push({
-              x: ship.x, y: ship.y - 35, life: .8,
-              text: `CLOSE! +${DIFFICULTY.closePassBonus}`
-            });
-            playSound("near");
+        if (!obstacle.nearAwarded && obstacle.y > ship.y + shipRadius + obstacle.radius * .68) {
+          const clearance = obstacle.closest - collisionDistance;
+          if (clearance >= 0 && clearance <= DIFFICULTY.closePassMargin) {
+            obstacle.nearAwarded = true;
+            nearMisses += 1;
+            tone(1120, .09, "sine", .022);
           }
         }
-      }
-
-      obstacles = obstacles.filter(obstacle => {
-        if (obstacle.y - obstacle.radius > height) {
-          dodged++;
-          return false;
+        if (!obstacle.passed && obstacle.y - obstacle.radius > ship.y + shipRadius) {
+          obstacle.passed = true;
+          dodged += 1;
         }
-        return true;
-      });
-      score = calculateScore();
-      if (elapsed >= ROUND_SECONDS) finish(true);
+      }
+      obstacles = obstacles.filter((obstacle) => obstacle.y < arenaHeight + obstacle.radius + 5);
+      for (const particle of confetti) {
+        particle.x += particle.vx * dt;
+        particle.y += particle.vy * dt;
+        particle.spin += dt * 5;
+      }
+      confetti = confetti.filter((particle) => particle.y < arenaHeight + 12);
+      updateScore();
     }
 
-    function calculateScore() {
-      return Math.floor(elapsed * 100) + dodged * 25 +
-        nearMisses * DIFFICULTY.closePassBonus;
-    }
-
-    function drawBackground() {
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "#1a1033");
-      gradient.addColorStop(.6, "#100c25");
-      gradient.addColorStop(1, "#092333");
+    function drawBackground(time) {
+      const gradient = ctx.createLinearGradient(0, 0, arenaWidth, arenaHeight);
+      gradient.addColorStop(0, "#201147");
+      gradient.addColorStop(.55, "#120c2c");
+      gradient.addColorStop(1, "#281044");
       ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, arenaWidth, arenaHeight);
 
-      ctx.strokeStyle = "#b095ff0c";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      const offset = visualTime * 25 % 48;
-      for (let x = 0; x < width; x += 48) {
-        ctx.moveTo(x, 0); ctx.lineTo(x, height);
-      }
-      for (let y = offset; y < height; y += 48) {
-        ctx.moveTo(0, y); ctx.lineTo(width, y);
-      }
-      ctx.stroke();
-
-      stars.forEach(star => {
-        ctx.globalAlpha = .25 + star.depth * .55;
-        ctx.fillStyle = star.depth > .7 ? "#71f5ff" : "#e2d2ff";
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      for (const star of stars) {
+        const twinkle = reduceMotion ? .74 : .45 + .45 * Math.abs(Math.sin(time * .001 + star.phase));
+        ctx.globalAlpha = twinkle;
+        ctx.fillStyle = star.phase > 3 ? "#64f5ff" : "#fff4d2";
         ctx.beginPath();
-        ctx.arc(star.x * width,
-          (star.y * height + visualTime * 20 * star.depth) % height,
-          star.radius, 0, Math.PI * 2);
+        ctx.arc(star.x * arenaWidth, star.y * arenaHeight, star.size, 0, Math.PI * 2);
         ctx.fill();
-      });
+      }
       ctx.globalAlpha = 1;
+      ctx.save();
+      ctx.strokeStyle = "rgba(139, 99, 236, .12)";
+      ctx.lineWidth = 1;
+      const spacing = 42;
+      const offset = reduceMotion ? 0 : (time * .015) % spacing;
+      for (let y = arenaHeight - offset; y < arenaHeight + spacing; y += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(arenaWidth, y);
+        ctx.stroke();
+      }
+      for (let x = 0; x <= arenaWidth; x += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(arenaWidth / 2 + (x - arenaWidth / 2) * .24, arenaHeight * .59);
+        ctx.lineTo(x, arenaHeight);
+        ctx.stroke();
+      }
+      ctx.restore();
     }
 
-    function drawDonut(obstacle) {
-      const r = obstacle.radius;
+    function drawDonut(obstacle, time) {
       ctx.save();
       ctx.translate(obstacle.x, obstacle.y);
       ctx.rotate(obstacle.rotation);
-      ctx.shadowColor = obstacle.color;
-      ctx.shadowBlur = 18;
-      ctx.strokeStyle = "#b76a39";
-      ctx.lineWidth = r * .65;
-      ctx.beginPath();
-      ctx.arc(0, 0, r * .66, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = obstacle.color;
-      ctx.lineWidth = r * .53;
-      ctx.beginPath();
-      ctx.arc(0, -2, r * .66, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.lineCap = "round";
-      ctx.lineWidth = 2.4;
-      for (let i = 0; i < 11; i++) {
-        const angle = i * Math.PI * 2 / 11;
-        const distance = r * (i % 2 ? .64 : .77);
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance - 2;
-        ctx.strokeStyle = colors[(i + 1) % colors.length];
-        ctx.beginPath();
-        ctx.moveTo(x - 2, y - 2);
-        ctx.lineTo(x + 2, y + 2);
-        ctx.stroke();
-      }
-      ctx.strokeStyle = "#ffffff65";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(0, -2, r * .86, 3.6, 4.7);
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    function drawCoffeeCup(obstacle) {
       const r = obstacle.radius;
-      ctx.save();
-      ctx.translate(obstacle.x, obstacle.y);
-      ctx.rotate(Math.sin(obstacle.rotation) * .16);
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-
-      // Steam uses independent phases and remains purely decorative.
-      ctx.strokeStyle = "#fff1dba0";
-      ctx.lineWidth = 1.7;
-      for (let i = -1; i <= 1; i++) {
-        const x = i * r * .28;
-        const sway = Math.sin(visualTime * 3 + obstacle.phase + i) * r * .12;
-        ctx.beginPath();
-        ctx.moveTo(x, -r * .9);
-        ctx.bezierCurveTo(x - sway, -r * 1.08, x + sway, -r * 1.22, x, -r * 1.4);
-        ctx.stroke();
-      }
-
-      const paper = ctx.createLinearGradient(-r, 0, r, 0);
-      paper.addColorStop(0, "#fff7e5");
-      paper.addColorStop(.55, "#f1d9b3");
-      paper.addColorStop(1, "#c89f7c");
-      ctx.fillStyle = paper;
       ctx.shadowColor = obstacle.color;
-      ctx.shadowBlur = 18;
+      ctx.shadowBlur = 13;
+      ctx.fillStyle = "#e9a565";
       ctx.beginPath();
-      ctx.moveTo(-r * .72, -r * .62);
-      ctx.lineTo(r * .72, -r * .62);
-      ctx.lineTo(r * .5, r * .8);
-      ctx.quadraticCurveTo(0, r * .96, -r * .5, r * .8);
-      ctx.closePath();
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
-
       ctx.fillStyle = obstacle.color;
       ctx.beginPath();
-      ctx.moveTo(-r * .65, -r * .2);
-      ctx.lineTo(r * .65, -r * .2);
-      ctx.lineTo(r * .55, r * .45);
-      ctx.lineTo(-r * .55, r * .45);
-      ctx.closePath();
+      ctx.arc(0, 0, r * .78, 0, Math.PI * 2);
       ctx.fill();
-
-      ctx.fillStyle = "#281636";
+      ctx.fillStyle = "#130b2c";
       ctx.beginPath();
-      ctx.arc(0, r * .12, r * .23, 0, Math.PI * 2);
+      ctx.arc(0, 0, r * .31, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = "#fff5d6";
-      ctx.beginPath();
-      for (let i = 0; i < 10; i++) {
-        const angle = -Math.PI / 2 + i * Math.PI / 5;
-        const size = r * (i % 2 ? .065 : .15);
-        const x = Math.cos(angle) * size;
-        const y = r * .12 + Math.sin(angle) * size;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+      const sprinkles = 8;
+      for (let i = 0; i < sprinkles; i += 1) {
+        const angle = i * Math.PI * 2 / sprinkles + .12;
+        ctx.save();
+        ctx.translate(Math.cos(angle) * r * .57, Math.sin(angle) * r * .57);
+        ctx.rotate(angle + time * .0002);
+        ctx.fillStyle = ["#ffe66d", "#72ffff", "#fff8ff", "#ff8e48"][i % 4];
+        ctx.fillRect(-2.1, -1, 4.2, 2);
+        ctx.restore();
       }
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle = "#bda2bc";
-      ctx.beginPath();
-      ctx.ellipse(0, -r * .62, r * .83, r * .2, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#fff4e6";
-      ctx.beginPath();
-      ctx.ellipse(0, -r * .74, r * .75, r * .19, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#594052";
-      ctx.beginPath();
-      ctx.ellipse(r * .27, -r * .75, r * .15, r * .055, 0, 0, Math.PI * 2);
-      ctx.fill();
       ctx.restore();
     }
 
-    function drawObstacle(obstacle) {
-      if (mode === "coffee") drawCoffeeCup(obstacle);
-      else drawDonut(obstacle);
-    }
-
-    function drawShip() {
-      if (state === "lost") return;
+    function drawShip(time) {
       ctx.save();
-      ctx.translate(ship.x, ship.y +
-        (state === "ready" ? Math.sin(visualTime * 3) * 4 : 0));
-      ctx.scale(MODES[mode].scale, MODES[mode].scale);
-
-      ctx.shadowColor = "#71f5ff";
-      ctx.shadowBlur = 22;
-      ctx.fillStyle = "#71f5ff";
+      ctx.translate(ship.x, ship.y);
+      ctx.rotate(ship.angle);
+      if (selectedMode.coffee) drawCoffeeShip(time);
+      else drawRocketShip(time);
+      ctx.restore();
+    }
+    function drawRocketShip(time) {
+      const scale = selectedMode.scale;
+      ctx.save();
+      ctx.scale(scale, scale);
+      ctx.shadowColor = "#64f5ff";
+      ctx.shadowBlur = 18;
+      ctx.fillStyle = "#54e9ff";
       ctx.beginPath();
-      ctx.moveTo(-7, 16);
-      ctx.lineTo(0, 34 + Math.sin(visualTime * 30) * 5);
-      ctx.lineTo(7, 16);
-      ctx.fill();
-
-      ctx.fillStyle = "#ff70c6";
-      ctx.beginPath();
-      ctx.moveTo(0, -25);
-      ctx.lineTo(-23, 20);
-      ctx.lineTo(0, 11);
-      ctx.lineTo(23, 20);
+      ctx.moveTo(-13, 13);
+      ctx.lineTo(-25, 23);
+      ctx.lineTo(-10, 22);
       ctx.closePath();
       ctx.fill();
-
-      ctx.shadowBlur = 8;
-      ctx.fillStyle = "#f7f1ff";
       ctx.beginPath();
-      ctx.moveTo(0, -25);
-      ctx.lineTo(-11, 17);
-      ctx.lineTo(11, 17);
+      ctx.moveTo(13, 13);
+      ctx.lineTo(25, 23);
+      ctx.lineTo(10, 22);
       ctx.closePath();
       ctx.fill();
-      ctx.fillStyle = "#352455";
+      ctx.shadowColor = "#ff58c8";
+      ctx.shadowBlur = 20;
+      const body = ctx.createLinearGradient(0, -24, 0, 25);
+      body.addColorStop(0, "#fff7ff");
+      body.addColorStop(.48, "#ff82de");
+      body.addColorStop(1, "#8655ff");
+      ctx.fillStyle = body;
       ctx.beginPath();
-      ctx.ellipse(0, -2, 5, 9, 0, 0, Math.PI * 2);
+      ctx.moveTo(0, -25);
+      ctx.quadraticCurveTo(17, -12, 14, 11);
+      ctx.lineTo(0, 22);
+      ctx.lineTo(-14, 11);
+      ctx.quadraticCurveTo(-17, -12, 0, -25);
       ctx.fill();
-      ctx.fillStyle = "#71f5ff";
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "#211343";
       ctx.beginPath();
-      ctx.ellipse(0, -4, 3, 5, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, -4, 5.5, 8, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#baffff";
+      ctx.beginPath();
+      ctx.ellipse(-1, -6, 2.1, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#ffe66d";
+      ctx.beginPath();
+      ctx.moveTo(-6, 20);
+      ctx.lineTo(0, 31 + Math.sin(time * .022) * 4);
+      ctx.lineTo(6, 20);
+      ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
-
-    function drawEffects() {
-      particles.forEach(p => {
+    function drawCoffeeShip(time) {
+      const wobble = Math.sin(time * .006) * .045;
+      ctx.rotate(wobble);
+      ctx.save();
+      ctx.scale(selectedMode.scale, selectedMode.scale);
+      ctx.shadowColor = "#ffe1a3";
+      ctx.shadowBlur = 18;
+      ctx.fillStyle = "#fff0d2";
+      ctx.beginPath();
+      ctx.moveTo(-16, -15);
+      ctx.lineTo(16, -15);
+      ctx.lineTo(12, 23);
+      ctx.quadraticCurveTo(0, 28, -12, 23);
+      ctx.closePath();
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "#ff5fae";
+      ctx.beginPath();
+      ctx.moveTo(-15, 1);
+      ctx.lineTo(15, 1);
+      ctx.lineTo(13, 17);
+      ctx.lineTo(-13, 17);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = "#ffe66d";
+      ctx.beginPath();
+      ctx.arc(0, 9, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#8a35bd";
+      for (let i = 0; i < 5; i += 1) {
+        const angle = -Math.PI / 2 + i * Math.PI * 2 / 5;
+        const x = Math.cos(angle) * 4;
+        const y = 9 + Math.sin(angle) * 4;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.25, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = "#f8c98b";
+      ctx.beginPath();
+      ctx.ellipse(0, -15, 17, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#603d79";
+      ctx.beginPath();
+      ctx.ellipse(0, -17, 7, 2.4, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,240,.76)";
+      ctx.lineWidth = 2;
+      for (let i = 0; i < 3; i += 1) {
+        const x = -7 + i * 7;
+        const steam = Math.sin(time * .008 + i * 2) * 2;
+        ctx.beginPath();
+        ctx.moveTo(x, -22);
+        ctx.bezierCurveTo(x - 4 + steam, -29, x + 4 - steam, -33, x, -40);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+    function drawConfetti(dt) {
+      for (const particle of confetti) {
         ctx.save();
-        ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
-        ctx.fillStyle = p.color;
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.life * 5);
-        if (p.confetti) ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 2);
-        else {
-          ctx.beginPath();
-          ctx.arc(0, 0, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.spin);
+        ctx.fillStyle = particle.color;
+        ctx.fillRect(-particle.size / 2, -particle.size / 3, particle.size, particle.size * .65);
         ctx.restore();
-      });
-      popups.forEach(p => {
-        ctx.save();
-        ctx.globalAlpha = Math.min(1, p.life * 2);
-        ctx.font = "bold 14px system-ui";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#ffe478";
-        ctx.fillText(p.text, p.x, p.y);
-        ctx.restore();
-      });
+      }
+    }
+    function render(time, dt) {
+      drawBackground(time);
+      for (const obstacle of obstacles) drawDonut(obstacle, time);
+      drawShip(time);
+      drawConfetti(dt);
     }
 
-    function frame(timestamp) {
-      let dt = lastFrame === null || document.hidden
-        ? 0 : Math.min((timestamp - lastFrame) / 1000, .1);
+    function loop(timestamp) {
+      if (!lastFrame) lastFrame = timestamp;
+      let dt = Math.min(.05, Math.max(0, (timestamp - lastFrame) / 1000));
       lastFrame = timestamp;
-
-      // Small simulation steps reduce missed collisions with faster obstacles.
-      while (dt > 0) {
-        const step = Math.min(dt, 1 / 120);
-        update(step);
-        dt -= step;
+      if (pausedForHiddenTab) dt = 0;
+      const simulationStep = .01;
+      for (let remaining = dt; remaining > 0; remaining -= simulationStep) {
+        const step = Math.min(simulationStep, remaining);
+        if (state === "countdown") updateCountdown(step);
+        else updateGame(step);
       }
-      updateHUD();
-      drawBackground();
-
-      if (state === "ready") {
-        for (let i = 0; i < 6; i++) {
-          drawObstacle({
-            x: width * (i + .5) / 6,
-            y: height * (.25 + (i % 3) * .2) + Math.sin(visualTime + i) * 16,
-            radius: 24 + (i % 2) * 8,
-            rotation: visualTime * .2 + i,
-            phase: i,
-            color: colors[i % colors.length]
-          });
-        }
-      }
-      obstacles.forEach(drawObstacle);
-      drawShip();
-      drawEffects();
-      requestAnimationFrame(frame);
+      if (state === "playing" && overlayTitle.textContent === "GO!" && roundElapsed > .55) overlay.hidden = true;
+      if (state === "ended" && overlay.hidden) overlay.hidden = false;
+      render(timestamp, dt);
+      requestAnimationFrame(loop);
     }
 
-    function setHostOpen(open) {
-      clearInput();
-      $("host").hidden = !open;
-      $("host-toggle").setAttribute("aria-expanded", String(open));
-      syncControls();
-      if (open) $("host-close").focus();
-      else $("host-toggle").focus();
+    function isEditingTarget(target) {
+      return target instanceof Element && (target.closest("input, textarea, select, [contenteditable='true']") !== null);
     }
-
-    function selectChallenge(index) {
-      copyAttempt++;
-      const challenge = CHALLENGES[index];
-      $("challenge-description").textContent = challenge.description;
-      $("host-prompt").value = challenge.prompt + GUARDRAILS;
-      challengeButtons.forEach((button, i) => {
-        button.setAttribute("aria-pressed", String(i === index));
-      });
-      setStatus("Not implemented in this baseline. Copy into Copilot for a real edit.");
-    }
-
-    function resetBooth() {
-      reset();
-      setStatus("Gameplay reset. Source-code edits are unchanged.");
-    }
-
-    // New-feature prompt choices have no launch button or simulated AI response.
-    CHALLENGES.forEach((challenge, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "challenge";
-      const title = document.createElement("span");
-      title.textContent = challenge.title;
-      const summary = document.createElement("small");
-      summary.textContent = challenge.summary;
-      button.append(title, summary);
-      button.addEventListener("click", () => selectChallenge(index));
-      $("challenges").append(button);
-      challengeButtons.push(button);
-    });
-
-    // Both prepared-mode selectors are built from the same definitions.
-    Object.entries(MODES).forEach(([id, settings]) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "mode";
-      button.dataset.mode = id;
-      const title = document.createElement("strong");
-      title.textContent = settings.title;
-      const description = document.createElement("small");
-      description.textContent = settings.description;
-      button.append(title, description);
-      button.addEventListener("click", () => setMode(id));
-      $("modes").append(button);
-      modeButtons.push(button);
-
-      const fallback = document.createElement("button");
-      fallback.type = "button";
-      fallback.className = "fallback-button";
-      fallback.textContent = `Play ${settings.title}`;
-      fallback.addEventListener("click", () => {
-        if (roundBusy()) return;
-        setMode(id);
-        setHostOpen(false);
-        start();
-      });
-      $("fallbacks").append(fallback);
-      fallbackButtons.push(fallback);
-    });
-
-    $("start").addEventListener("click", start);
-    $("reset").addEventListener("click", resetBooth);
-    $("host-reset").addEventListener("click", resetBooth);
-    $("host-toggle").addEventListener("click", () => setHostOpen($("host").hidden));
-    $("host-close").addEventListener("click", () => setHostOpen(false));
-
-    $("sound-toggle").addEventListener("click", async () => {
-      soundEnabled = !soundEnabled;
-      updateSoundButton();
-      if (!soundEnabled) {
-        stopSounds();
-        return;
-      }
-      if (await prepareAudio()) tone(740, .1, 0, "triangle");
-    });
-
-    function selectPrompt() {
-      $("host-prompt").focus();
-      $("host-prompt").select();
-      setStatus("Text selected. Press Ctrl+C or Command+C.");
-    }
-
-    $("host-select").addEventListener("click", selectPrompt);
-    $("host-copy").addEventListener("click", async () => {
-      const attempt = ++copyAttempt;
-      const text = $("host-prompt").value;
-      try {
-        if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-        await navigator.clipboard.writeText(text);
-        if (attempt === copyAttempt) {
-          setStatus("Copied. Paste into Copilot in your editor, then review the diff.");
-        }
-      } catch {
-        if (attempt !== copyAttempt) return;
-        selectPrompt();
-        setStatus("Automatic copying unavailable. Press Ctrl+C or Command+C.");
-      }
-    });
-    $("host-prompt").addEventListener("input", () => {
-      copyAttempt++;
-      setStatus("Prompt edited. This does not modify the game.");
-    });
-
-    $("backup").addEventListener("click", () => {
-      const blob = new Blob([LOADED_SOURCE], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "dodge-the-donuts-loaded-source.html";
-      document.body.append(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setStatus("Downloaded the loaded source. Keep an untouched copy before live edits.");
-    });
-
-    // Host typing must not trigger Space, R, or arrow-key game controls.
-    $("host").addEventListener("keydown", event => {
-      event.stopPropagation();
+    function onKeyDown(event) {
       if (event.key === "Escape") {
-        event.preventDefault();
-        setHostOpen(false);
+        if (!panel.hidden) {
+          panel.hidden = true;
+          updateControls();
+        }
+        return;
       }
-    });
-    $("host").addEventListener("keyup", event => event.stopPropagation());
-
-    function normalizedKey(event) {
-      return event.key.length === 1 ? event.key.toLowerCase() : event.key;
-    }
-
-    document.addEventListener("keydown", event => {
-      if (event.ctrlKey || event.metaKey || event.altKey) return;
-      if (event.target instanceof Element &&
-          event.target.closest("input, textarea, select, [contenteditable]")) return;
-
-      const key = normalizedKey(event);
+      if (isEditingTarget(event.target)) return;
+      const key = event.key.toLowerCase();
       if (key === "h" && !event.repeat) {
-        event.preventDefault();
-        setHostOpen($("host").hidden);
+        panel.hidden = !panel.hidden;
+        updateControls();
         return;
       }
-      if (key === "Escape" && !$("host").hidden) {
-        setHostOpen(false);
+      if ((key === "r") && !event.repeat) {
+        resetGame();
         return;
       }
-      if (key === "r" && !event.repeat) {
-        resetBooth();
+      if (key === " " || key === "spacebar") {
+        if (canStart()) {
+          event.preventDefault();
+          if (!event.repeat) startRound();
+        }
         return;
       }
-      if (!$("host").hidden) return;
-
-      // Retain native Space-to-click behavior for focused buttons.
-      if (key === " " && !(event.target instanceof HTMLButtonElement)) {
-        event.preventDefault();
-        if (!event.repeat) start();
-      }
-      if (["ArrowLeft", "ArrowRight", "a", "d"].includes(key)) {
+      if (["arrowleft", "arrowright", "a", "d"].includes(key) && state === "playing") {
         event.preventDefault();
         keys.add(key);
       }
-    });
-    document.addEventListener("keyup", event => keys.delete(normalizedKey(event)));
-    window.addEventListener("blur", clearInput);
-    document.addEventListener("visibilitychange", () => {
-      lastFrame = null;
-      clearInput();
-      if (document.hidden) stopSounds();
-    });
-
-    function aim(event) {
-      pointerTarget = event.clientX - canvas.getBoundingClientRect().left;
     }
-    canvas.addEventListener("pointerdown", event => {
-      if (state !== "running" || !$("host").hidden) return;
-      dragging = true;
+    function onKeyUp(event) {
+      keys.delete(event.key.toLowerCase());
+    }
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", () => {
+      keys.clear();
+      pointerActive = false;
+      pointerTarget = null;
+    });
+    document.addEventListener("visibilitychange", () => {
+      keys.clear();
+      pointerActive = false;
+      pointerTarget = null;
+      if (document.hidden) {
+        pausedForHiddenTab = true;
+        cancelAudio();
+      } else {
+        pausedForHiddenTab = false;
+        lastFrame = 0;
+        if (audioEnabled && audioContext) audioContext.resume().catch(() => {});
+      }
+    });
+    window.addEventListener("resize", resizeCanvas);
+    canvas.addEventListener("pointerdown", (event) => {
+      if (state !== "playing") return;
       canvas.setPointerCapture(event.pointerId);
-      aim(event);
+      pointerActive = true;
+      const rect = canvas.getBoundingClientRect();
+      pointerTarget = event.clientX - rect.left;
     });
-    canvas.addEventListener("pointermove", event => {
-      if (dragging && state === "running") aim(event);
+    canvas.addEventListener("pointermove", (event) => {
+      if (!pointerActive) return;
+      const rect = canvas.getBoundingClientRect();
+      pointerTarget = event.clientX - rect.left;
     });
-    canvas.addEventListener("pointerup", () => { dragging = false; });
-    canvas.addEventListener("pointercancel", clearInput);
-    canvas.addEventListener("lostpointercapture", () => { dragging = false; });
+    function stopPointer() {
+      pointerActive = false;
+      pointerTarget = null;
+    }
+    canvas.addEventListener("pointerup", stopPointer);
+    canvas.addEventListener("pointercancel", stopPointer);
+    canvas.addEventListener("lostpointercapture", stopPointer);
 
-    $("fullscreen").addEventListener("click", async () => {
+    startButton.addEventListener("click", startRound);
+    modeSelect.addEventListener("change", () => setMode(modeSelect.value));
+    for (const button of fallbackModes.querySelectorAll("[data-mode]")) {
+      button.addEventListener("click", () => {
+        setMode(button.dataset.mode);
+        document.getElementById("startButton").focus();
+      });
+    }
+    document.getElementById("resetButton").addEventListener("click", resetGame);
+    panelToggle.addEventListener("click", () => {
+      panel.hidden = !panel.hidden;
+      updateControls();
+    });
+    audioButton.addEventListener("click", () => {
+      audioEnabled = !audioEnabled;
+      audioButton.textContent = `Sound: ${audioEnabled ? "On" : "Off"}`;
+      audioButton.setAttribute("aria-pressed", String(audioEnabled));
+      if (audioEnabled) initializeAudio();
+      else cancelAudio();
+    });
+    document.getElementById("fullscreenButton").addEventListener("click", async () => {
       try {
         if (document.fullscreenElement) await document.exitFullscreen();
         else await document.documentElement.requestFullscreen();
-      } catch {
-        $("fullscreen").textContent = "Use browser fullscreen";
+      } catch (_) {
+        resultLine.textContent = "Fullscreen is not available in this browser or from this file.";
       }
     });
-    document.addEventListener("fullscreenchange", () => {
-      $("fullscreen").textContent =
-        document.fullscreenElement ? "⛶ Exit fullscreen" : "⛶ Fullscreen";
+    document.getElementById("backupButton").addEventListener("click", () => {
+      try {
+        const blob = new Blob([loadedHtml], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "dodge-the-donuts-loaded-copy.html";
+        link.hidden = true;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        resultLine.textContent = "Downloaded the HTML version this page loaded. Keep an untouched backup separately.";
+      } catch (_) {
+        resultLine.textContent = "Could not download the loaded HTML in this browser.";
+      }
     });
 
-    // Initialize once, then run one animation loop for the entire application.
-    new ResizeObserver(resize).observe(canvas);
-    resize();
-    reset();
-    selectChallenge(0);
-    updateSoundButton();
-    requestAnimationFrame(frame);
+    promptList.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-copy-prompt]");
+      if (!button || button.disabled) return;
+      const article = button.closest(".prompt-card");
+      const textarea = article.querySelector("textarea");
+      const status = article.querySelector(".copy-status");
+      const snapshot = textarea.value;
+      button.disabled = true;
+      status.textContent = "Copying this prompt only. Nothing is being submitted.";
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("Clipboard API unavailable");
+        await navigator.clipboard.writeText(snapshot);
+        status.textContent = "Copied. Paste into Copilot yourself when ready.";
+      } catch (_) {
+        textarea.focus();
+        textarea.select();
+        let copied = false;
+        try { copied = document.execCommand("copy"); } catch (_) { copied = false; }
+        if (copied) {
+          status.textContent = "Copied using the browser fallback. Paste into Copilot yourself.";
+        } else {
+          status.textContent = "Prompt selected for manual copy. Press Ctrl+C or Command+C, then paste into Copilot yourself.";
+        }
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    modeSelect.value = selectedMode.id;
+    resizeCanvas();
+    updateControls();
+    updateScore();
+    requestAnimationFrame(loop);
   </script>
 </body>
 </html>
