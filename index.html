@@ -539,12 +539,14 @@
     let spawnElapsed = 0;
     let lastFrame = 0;
     let pausedForHiddenTab = false;
+    let windowHasFocus = document.hasFocus();
     let keys = new Set();
     let pointerActive = false;
     let pointerTarget = null;
     let gamepadIndex = null;
     let gamepadDirection = 0;
     let gamepadStartPressed = false;
+    let suppressGamepadStart = !windowHasFocus || document.hidden;
     let obstacles = [];
     let confetti = [];
     let audioEnabled = false;
@@ -1124,21 +1126,27 @@
 
     const GAMEPAD_DEADZONE = .25;
     function pollGamepad() {
+      const inputActive = windowHasFocus && !document.hidden;
       gamepadDirection = 0;
       if (gamepadIndex === null) return;
       const pads = navigator.getGamepads ? navigator.getGamepads() : [];
       const pad = pads[gamepadIndex];
       if (!pad) return;
+      let nextDirection = 0;
       const axisX = pad.axes[0] || 0;
-      if (axisX <= -GAMEPAD_DEADZONE) gamepadDirection = -1;
-      else if (axisX >= GAMEPAD_DEADZONE) gamepadDirection = 1;
+      if (axisX <= -GAMEPAD_DEADZONE) nextDirection = -1;
+      else if (axisX >= GAMEPAD_DEADZONE) nextDirection = 1;
       const dpadLeft = pad.buttons[14] && pad.buttons[14].pressed;
       const dpadRight = pad.buttons[15] && pad.buttons[15].pressed;
-      if (dpadLeft) gamepadDirection = -1;
-      else if (dpadRight) gamepadDirection = 1;
+      if (dpadLeft) nextDirection = -1;
+      else if (dpadRight) nextDirection = 1;
       const startPressed = !!((pad.buttons[0] && pad.buttons[0].pressed) || (pad.buttons[9] && pad.buttons[9].pressed));
-      if (startPressed && !gamepadStartPressed && canStart()) startRound();
+      if (inputActive) {
+        gamepadDirection = nextDirection;
+        if (!suppressGamepadStart && startPressed && !gamepadStartPressed && canStart()) startRound();
+      }
       gamepadStartPressed = startPressed;
+      suppressGamepadStart = !inputActive;
     }
     window.addEventListener("gamepadconnected", (event) => {
       if (gamepadIndex === null) gamepadIndex = event.gamepad.index;
@@ -1209,18 +1217,22 @@
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
     window.addEventListener("blur", () => {
+      windowHasFocus = false;
       keys.clear();
       pointerActive = false;
       pointerTarget = null;
       gamepadDirection = 0;
-      gamepadStartPressed = false;
+      suppressGamepadStart = true;
+    });
+    window.addEventListener("focus", () => {
+      windowHasFocus = true;
     });
     document.addEventListener("visibilitychange", () => {
       keys.clear();
       pointerActive = false;
       pointerTarget = null;
       gamepadDirection = 0;
-      gamepadStartPressed = false;
+      if (document.hidden) suppressGamepadStart = true;
       if (document.hidden) {
         pausedForHiddenTab = true;
         cancelAudio();
